@@ -13,29 +13,46 @@ import {
   Picker,
   Image
 } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 
 export default class App extends Component<{}> {
   constructor(props) {
     super(props);
-    this.state = {language: 'java'};
+    this.state = {
+      language: 'date',
+      date: '2017-10-12'
+    };
   } 
 
   render() {
     return (
       <View style={styles.container}>
-        
-        <Picker
-          style={styles.instructions}
-          selectedValue={this.state.language}
-          onValueChange={lang => this.setState({language: lang})}
-          mode="dropdown">
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-          <Picker.Item label="C++" value="cpp" />
-          <Picker.Item label="C#" value="cs" />
-          <Picker.Item label="Python" value="py" />
-        </Picker>
-        <Text style={styles.welcome}>{this.state.language}</Text>
+        <Text style={styles.welcome}>
+          Pyrahealth Calculator
+        </Text>
+        <Text style={styles.instructions}>Please choose your date of birth:</Text>
+        <DatePicker
+          style={styles.datepicker}
+          date={this.state.date}
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          minDate="1900-01-01"
+          maxDate="2017-11-01"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          onDateChange={(date) => {this.setState({date: date})}}
+        />
       </View>
     );
   }
@@ -47,12 +64,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFE0',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    margin: 10,
+    margin: 20,
+    color: '#00FF00',
   },
   instructions: {
+    fontSize: 20,
+    textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    margin: 10,
   },
+  datepicker: {
+    width: '90%',
+    justifyContent: 'center',
+    backgroundColor: '#00FFFF',
+  }
 });
