@@ -20,7 +20,7 @@ export default class App extends Component<{}> {
     super(props);
     this.state = {
       language: 'date',
-      date: '2017-10-12'
+      date: '10-12-2017'
     };
   } 
 
@@ -36,9 +36,9 @@ export default class App extends Component<{}> {
           date={this.state.date}
           mode="date"
           placeholder="select date"
-          format="YYYY-MM-DD"
-          minDate="1900-01-01"
-          maxDate="2017-11-01"
+          format="MM-DD-YYYY"
+          minDate="01-01-1940"
+          maxDate="11-01-2017"
           cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
@@ -53,6 +53,7 @@ export default class App extends Component<{}> {
           }}
           onDateChange={(date) => {this.setState({date: date})}}
         />
+        <Text style={styles.instructions}>Date of birth: {this.state.date}</Text>
       </View>
     );
   }
@@ -79,5 +80,7 @@ const styles = StyleSheet.create({
     width: '90%',
     justifyContent: 'center',
     backgroundColor: '#00FFFF',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   }
 });
