@@ -47,17 +47,6 @@ function sumAllDigits(numbers) {
   return numbersAsText;
 }
 
-function getMissingNumbers(s) {
-  var set = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  var res = '';
-  for (let i = 0; i < set.length; i++) {
-    if (s.indexOf(set[i], 0) == -1) {
-      res += set[i];
-    }
-  }
-  return res;
-}
-
 export default class App extends Component<{}> {
   constructor(props) {
     super(props);
@@ -76,7 +65,8 @@ export default class App extends Component<{}> {
       dayAdd: myDayAdd,
       monthAdd: myMonthAdd,
       yearAdd: myYearAdd,
-      Addition: myAddition
+      Addition: myAddition,
+      missingNumber: ''
     };
   }
 
@@ -90,6 +80,17 @@ export default class App extends Component<{}> {
     let yearAdd = this.state.yearAdd + '';
     let Addition = this.state.Addition + '';
     return day + month + year + dayAdd + monthAdd + yearAdd + Addition;
+  }
+
+  getMissingNumbers(s) {
+    var set = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    var res = '';
+    for (let i = 0; i < set.length; i++) {
+      if (s.indexOf(set[i], 0) == -1) {
+        res += set[i];
+      }
+    }
+    return res;
   }
 
   render() {
@@ -148,7 +149,7 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>Year Add: {this.state.yearAdd}</Text>
         <Text style={styles.instructions}>Addition of Date, Month, Year: {this.state.Addition}</Text>
         <Text style={styles.instructions}>Numbers present in your date of birth: {this.getNumbers()}</Text>
-        <Text style={styles.instructions}>Missing numbers are: {getMissingNumbers(this.getNumbers())}</Text>
+        <Text style={styles.instructions}>Missing numbers are: {this.getMissingNumbers(this.getNumbers())}</Text>
 
         <View style={styles.alternativeLayoutButtonContainer}>
           <Button
@@ -157,11 +158,10 @@ export default class App extends Component<{}> {
           />
           <Button
             onPress={aboutDialog}
-            title="About"
+            title="OK!"
             color="#841584"
           />
         </View>
-        
       </ScrollView>
     );
   }
